@@ -1,19 +1,324 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Personal website">
-    <title>My Website</title>
-    <style>
-        html, body {
-            margin: 0;
-            min-height: 100%;
-            background: #ffffff;
-        }
-    </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Amal Kakkat · AI/ML Developer</title>
+<meta name="description" content="Amal Kakkat is an AI engineering student building intelligent systems and practical software: anomaly detection, privacy-preserving learning, and database-backed apps.">
+<meta property="og:title" content="Amal Kakkat · AI/ML Developer">
+<meta property="og:description" content="Building intelligent systems and practical software solutions.">
+<meta property="og:image" content="assets/amal-1.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#1a1210; --panel:#241a17; --line:#3a2c26;
+  --text:#f3ebe0; --muted:#b0a090; --amber:#eaa43a; --alert:#ee5a4d;
+  --display:"Bricolage Grotesque","Helvetica Neue",Arial,sans-serif;
+  --body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  box-sizing:border-box;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{margin:0;background:var(--bg);color:var(--text);font:400 17px/1.65 var(--body);-webkit-font-smoothing:antialiased}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--amber);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+h1,h2,h3{font-family:var(--display);line-height:1.05;margin:0;letter-spacing:-.02em}
+h2{font-size:clamp(2rem,4.5vw,3.2rem);font-weight:800;margin-bottom:28px}
+h3{font-size:1.35rem;font-weight:600;letter-spacing:-.01em}
+p{margin:0 0 1em;max-width:62ch}
+section{padding:96px 0}
+
+/* nav */
+nav{position:sticky;top:0;z-index:10;background:rgba(26,18,16,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:60px}
+nav b{font-family:var(--display);font-weight:800;font-size:1.1rem}
+nav ul{display:flex;gap:26px;list-style:none;margin:0;padding:0;font-size:.95rem}
+nav ul a{text-decoration:none;color:var(--muted)}
+nav ul a:hover{color:var(--text)}
+
+/* hero */
+.hero{padding:64px 0 0;overflow:hidden}
+.hero .wrap{display:grid;grid-template-columns:1.25fr .75fr;gap:56px;align-items:end}
+.hero h1{font-size:clamp(3.4rem,10vw,8rem);font-weight:800;letter-spacing:-.04em;line-height:.9}
+.hero .role{font-family:var(--display);font-size:clamp(1.2rem,2.4vw,1.7rem);font-weight:600;color:var(--amber);margin:22px 0 18px}
+.hero p{color:var(--muted);font-size:1.1rem}
+.btns{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.btn{display:inline-block;padding:12px 22px;border-radius:999px;border:1px solid var(--line);text-decoration:none;font-weight:500;transition:background .2s,color .2s,border-color .2s}
+.btn.main{background:var(--amber);color:#1a1210;border-color:var(--amber)}
+.btn:hover{border-color:var(--amber)}
+.btn.main:hover{background:#f6bb5c}
+.portrait{position:relative;margin:0;border-radius:200px 200px 0 0;overflow:hidden;aspect-ratio:3/4;background:var(--panel)}
+.portrait img{width:100%;height:100%;object-fit:cover;object-position:50% 20%;display:block}
+.trace{margin-top:56px;border-top:1px solid var(--line);position:relative;background:linear-gradient(var(--panel),var(--bg))}
+.trace canvas{display:block;width:100%;height:150px}
+.trace span{position:absolute;right:24px;top:12px;font-size:.85rem;color:var(--muted)}
+.trace span i{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--alert);margin-right:8px;vertical-align:middle}
+
+/* about */
+.about .wrap{display:grid;grid-template-columns:.8fr 1.2fr;gap:64px;align-items:center}
+.about figure{margin:0;border-radius:18px;overflow:hidden;aspect-ratio:4/5}
+.about img{width:100%;height:100%;object-fit:cover;object-position:50% 25%;display:block}
+.facts{display:grid;grid-template-columns:repeat(2,1fr);gap:0;margin-top:28px;border-top:1px solid var(--line)}
+.facts div{padding:16px 0;border-bottom:1px solid var(--line)}
+.facts dt{color:var(--muted);font-size:.85rem}
+.facts dd{margin:2px 0 0;font-weight:500}
+
+/* projects */
+.feature{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;background:var(--panel);border:1px solid var(--line);border-radius:22px;padding:44px}
+.badge{display:inline-block;background:rgba(238,90,77,.14);color:#ff8d82;border:1px solid rgba(238,90,77,.4);border-radius:999px;padding:3px 14px;font-size:.85rem;margin-bottom:18px}
+.feature h3{font-size:clamp(1.8rem,3.6vw,2.6rem);font-weight:800;margin-bottom:14px}
+.feature ul{margin:0;padding-left:1.1em;color:var(--muted)}
+.feature li{margin-bottom:.5em}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 0;padding:0;list-style:none}
+.chips li{border:1px solid var(--line);border-radius:8px;padding:3px 11px;font-size:.88rem;color:var(--muted);margin:0}
+.pipe{display:flex;flex-direction:column;gap:0;align-self:center}
+.pipe div{border-left:2px solid var(--amber);padding:6px 0 18px 20px;position:relative}
+.pipe div::before{content:"";position:absolute;left:-7px;top:11px;width:12px;height:12px;border-radius:50%;background:var(--amber)}
+.pipe div:last-child{border-color:transparent;padding-bottom:0}
+.pipe div:last-child::before{background:var(--alert)}
+.pipe b{display:block;font-family:var(--display);font-size:1.05rem}
+.pipe small{color:var(--muted);font-size:.9rem}
+.list{margin-top:28px}
+.row{display:grid;grid-template-columns:.8fr 1.4fr 1fr;gap:32px;padding:30px 0;border-top:1px solid var(--line);align-items:start}
+.row:last-child{border-bottom:1px solid var(--line)}
+.row p{color:var(--muted);margin:0}
+.row .chips{margin:0;justify-content:flex-end}
+.tag{font-size:.82rem;color:var(--amber);display:block;margin-top:6px;font-family:var(--body);font-weight:400;letter-spacing:0}
+
+/* skills */
+.skills{display:grid;grid-template-columns:repeat(3,1fr);gap:40px 32px}
+.skills h3{font-size:1.1rem;color:var(--amber);margin-bottom:12px}
+.skills ul{list-style:none;margin:0;padding:0;color:var(--muted)}
+.skills li{padding:5px 0;border-bottom:1px solid var(--line)}
+
+/* activity */
+.two{display:grid;grid-template-columns:1fr 1fr;gap:32px}
+.card{border:1px solid var(--line);border-radius:18px;padding:32px}
+.card p{color:var(--muted)}
+.card ul{margin:0;padding-left:1.1em;color:var(--muted)}
+
+/* contact */
+.contact{text-align:left;padding-bottom:64px}
+.contact h2{font-size:clamp(2.6rem,8vw,6rem);letter-spacing:-.035em;max-width:12ch}
+footer{border-top:1px solid var(--line);padding:24px 0;color:var(--muted);font-size:.9rem}
+
+@media (max-width:860px){
+  nav ul{display:none}
+  .hero .wrap,.about .wrap,.feature,.two,.skills{grid-template-columns:1fr}
+  .hero .wrap{gap:36px}
+  .portrait{max-width:380px;border-radius:160px 160px 0 0}
+  .row{grid-template-columns:1fr;gap:12px}
+  .row .chips{justify-content:flex-start}
+  .feature{padding:28px}
+  section{padding:72px 0}
+  .about figure{max-width:420px}
+}
+@media (prefers-reduced-motion:no-preference){
+  .hero h1,.hero .role,.hero p,.btns,.portrait{animation:rise .8s cubic-bezier(.2,.7,.2,1) both}
+  .hero .role{animation-delay:.1s}.hero p{animation-delay:.18s}.btns{animation-delay:.26s}.portrait{animation-delay:.2s}
+  @keyframes rise{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+}
+</style>
 </head>
 <body>
+
+<nav><div class="wrap">
+  <b>Amal Kakkat</b>
+  <ul>
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#community">Community</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</div></nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div>
+      <h1>Amal Kakkat</h1>
+      <div class="role">AI/ML developer and engineering student</div>
+      <p>I build intelligent systems and the software around them: models that spot what's wrong, backends that serve them, and interfaces people can actually use.</p>
+      <div class="btns">
+        <a class="btn main" href="#projects">See my projects</a>
+        <a class="btn" href="https://github.com/iglitchfast" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+    <figure class="portrait"><img src="assets/amal-1.jpg" alt="Portrait of Amal Kakkat in a black leather jacket"></figure>
+  </div>
+  <div class="trace" aria-hidden="true">
+    <span><i></i>Anomaly detected</span>
+    <canvas id="trace"></canvas>
+  </div>
+</header>
+
+<section id="about" class="about"><div class="wrap">
+  <figure><img src="assets/amal-2.png" alt="Amal Kakkat standing in a doorway" loading="lazy"></figure>
+  <div>
+    <h2>About me</h2>
+    <p>I'm an engineering student at Sree Buddha College of Engineering, Pattoor, in Kerala. I like projects that take a messy real-world problem and turn it into something that runs end to end: raw data, a trained model, an API, and a dashboard.</p>
+    <p>Most of my work sits between machine learning and backend engineering. I care about explainable results, privacy-aware design, and code that's split into modules someone else can read.</p>
+    <dl class="facts">
+      <div><dt>Studying</dt><dd>Engineering, Sree Buddha College of Engineering</dd></div>
+      <div><dt>Focus</dt><dd>AI, machine learning, backend</dd></div>
+      <div><dt>Also into</dt><dd>Computer vision, privacy engineering</dd></div>
+      <div><dt>Based in</dt><dd>Kerala, India</dd></div>
+    </dl>
+  </div>
+</div></section>
+
+<section id="projects"><div class="wrap">
+  <h2>Projects</h2>
+
+  <article class="feature">
+    <div>
+      <span class="badge">Hackathon finalist: top 8 of about 600 teams</span>
+      <h3>AEGIS: chiller anomaly detection</h3>
+      <p style="color:var(--muted)">An ML system that reads industrial chiller sensor data, finds abnormal operating periods, and explains in plain language why they were flagged.</p>
+      <ul>
+        <li>Handles missing values and time gaps, then builds lag and rolling-statistic features.</li>
+        <li>Compares a linear regression baseline against XGBoost, using time-aware train, validation and test splits.</li>
+        <li>Scores anomalies in context with median absolute deviation, groups them into periods, and rates severity.</li>
+        <li>Uses SHAP to show which signals drove each anomaly.</li>
+        <li>FastAPI endpoints for ingestion, training, inference, anomalies and insights, feeding a React dashboard.</li>
+      </ul>
+      <ul class="chips">
+        <li>Python</li><li>XGBoost</li><li>SHAP</li><li>FastAPI</li><li>PostgreSQL</li><li>SQLAlchemy</li><li>Next.js</li><li>TypeScript</li><li>Recharts</li>
+      </ul>
+    </div>
+    <div class="pipe">
+      <div><b>Ingest</b><small>Schema validation, gap handling</small></div>
+      <div><b>Engineer features</b><small>Lags and rolling statistics</small></div>
+      <div><b>Predict</b><small>Linear baseline, then XGBoost</small></div>
+      <div><b>Score</b><small>Contextual MAD, grouped periods</small></div>
+      <div><b>Explain</b><small>SHAP and plain-language summaries</small></div>
+    </div>
+  </article>
+
+  <div class="list">
+    <article class="row">
+      <h3>EduLift<span class="tag">Privacy-preserving adaptive learning</span></h3>
+      <p>Quizzes are scored on the student's own device and reduced to a difficulty level from 1 to 5. Only a SHA-256 token goes to the backend, so raw performance data never leaves the browser. Includes login, grade and subject selection, and subject notes, in a modular vanilla JavaScript frontend.</p>
+      <ul class="chips"><li>Python</li><li>http.server</li><li>JavaScript</li><li>Tailwind CSS</li><li>SHA-256</li></ul>
+    </article>
+    <article class="row">
+      <h3>Insurance Management System<span class="tag">Desktop app</span></h3>
+      <p>A Tkinter app on a MySQL database with separate admin, agent and user dashboards. Covers policy management and purchase, claim submission and status tracking, search, admin statistics, and SHA-256 password hashing, split into config, database and GUI modules.</p>
+      <ul class="chips"><li>Python</li><li>Tkinter</li><li>MySQL</li></ul>
+    </article>
+    <article class="row">
+      <h3>TRIGR<span class="tag">Computer vision</span></h3>
+      <p>A Python computer vision project built around MediaPipe. I studied its modules end to end and presented the full codebase to my class.</p>
+      <ul class="chips"><li>Python</li><li>MediaPipe</li></ul>
+    </article>
+    <article class="row">
+      <h3>AttendX<span class="tag">Concept in progress</span></h3>
+      <p>An attendance planner that tracks subjects, handles holidays and cancelled classes, and works out how many classes a student can safely miss while staying above the minimum percentage.</p>
+      <ul class="chips"><li>FastAPI</li><li>PostgreSQL</li><li>Next.js</li><li>Recharts</li></ul>
+    </article>
+    <article class="row">
+      <h3>Python Chess<span class="tag">Game</span></h3>
+      <p>A chess game with its own board representation, game state and piece graphics, built in Pygame.</p>
+      <ul class="chips"><li>Python</li><li>Pygame</li></ul>
+    </article>
+    <article class="row">
+      <h3>Notes Generator<span class="tag">Edtech, in progress</span></h3>
+      <p>A modular JavaScript notes system with one file per subject, organised for primary, secondary and higher-secondary levels.</p>
+      <ul class="chips"><li>JavaScript</li></ul>
+    </article>
+    <article class="row">
+      <h3>HOTSPOT<span class="tag">Product pitch</span></h3>
+      <p>A product concept for which I wrote the product and feature introduction scripts and helped prepare the pitch deck.</p>
+      <ul class="chips"><li>Pitching</li><li>Scriptwriting</li></ul>
+    </article>
+  </div>
+</div></section>
+
+<section id="skills"><div class="wrap">
+  <h2>Skills</h2>
+  <div class="skills">
+    <div><h3>AI and machine learning</h3><ul><li>Time-series analysis</li><li>Anomaly detection</li><li>XGBoost, linear regression</li><li>Feature engineering</li><li>SHAP explainability</li><li>Model evaluation</li></ul></div>
+    <div><h3>Backend and data</h3><ul><li>FastAPI, REST APIs</li><li>PostgreSQL, MySQL</li><li>SQLAlchemy, SQL</li><li>Schema validation</li><li>Authentication, password hashing</li></ul></div>
+    <div><h3>Frontend</h3><ul><li>React, Next.js</li><li>TypeScript, JavaScript</li><li>HTML, CSS, Tailwind CSS</li><li>Recharts dashboards</li><li>Tkinter desktop GUIs</li></ul></div>
+    <div><h3>Languages</h3><ul><li>Python</li><li>JavaScript, TypeScript</li><li>SQL</li><li>C</li><li>HTML, CSS</li></ul></div>
+    <div><h3>Tools</h3><ul><li>Git, GitHub</li><li>VS Code, terminal</li><li>Python virtual environments</li><li>Vercel deployment</li><li>Docker basics</li></ul></div>
+    <div><h3>Also</h3><ul><li>Computer vision with MediaPipe</li><li>Privacy-aware design</li><li>Technical presentations</li><li>Documentation</li></ul></div>
+  </div>
+</div></section>
+
+<section id="community"><div class="wrap">
+  <h2>Beyond the code</h2>
+  <div class="two">
+    <div class="card">
+      <h3>NTCIMR</h3>
+      <p>Nikola Tesla Centre for Innovation and Multidisciplinary Research, Sree Buddha College of Engineering.</p>
+      <ul>
+        <li>Prepared inauguration programme material, scripts and announcements.</li>
+        <li>Wrote posters, deadline updates and the idea-pitching competition notices.</li>
+        <li>Wrote a newspaper-style report on the centre's inauguration.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>TinkerHub SBCE</h3>
+      <p>Study Jam sessions run by the campus tech community.</p>
+      <ul>
+        <li>Helped design a repeatable workflow for running Study Jams.</li>
+        <li>Documented scheduling and volunteer responsibilities.</li>
+        <li>Worked on making it easier for volunteers to take ownership of events.</li>
+      </ul>
+    </div>
+  </div>
+</div></section>
+
+<section id="contact" class="contact"><div class="wrap">
+  <h2>Let's build something.</h2>
+  <p style="color:var(--muted)">My code, experiments and everything above live on GitHub.</p>
+  <div class="btns">
+    <a class="btn main" href="https://github.com/iglitchfast" target="_blank" rel="noopener">github.com/iglitchfast</a>
+  </div>
+</div></section>
+
+<footer><div class="wrap">© <span id="yr"></span> Amal Kakkat · Sree Buddha College of Engineering, Pattoor</div></footer>
+
+<script>
+document.getElementById('yr').textContent=new Date().getFullYear();
+(function(){
+  var c=document.getElementById('trace'),x=c.getContext('2d'),W,H,dpr,t=0;
+  var still=matchMedia('(prefers-reduced-motion:reduce)').matches;
+  function size(){dpr=window.devicePixelRatio||1;W=c.clientWidth;H=c.clientHeight;c.width=W*dpr;c.height=H*dpr;x.setTransform(dpr,0,0,dpr,0,0)}
+  function val(u){ // u = position along the trace
+    var v=Math.sin(u*.018)*14+Math.sin(u*.05)*7+Math.sin(u*.23)*3;
+    var p=((u%1400)+1400)%1400;
+    if(p>900&&p<980){v+=Math.sin((p-900)/80*Math.PI)*46*Math.sin((p-900)*.35+1)}
+    return v}
+  function draw(){
+    x.clearRect(0,0,W,H);var mid=H/2+6,off=t;
+    x.lineWidth=2;x.lineJoin='round';
+    // anomaly band
+    var bandStart=(900-(off%1400)+1400)%1400,bandEnd=bandStart+80;
+    for(var k=-1;k<=0;k++){
+      var s=bandStart+k*1400;
+      x.fillStyle='rgba(238,90,77,.13)';x.fillRect(s,0,80,H);
+    }
+    x.beginPath();
+    for(var i=0;i<=W;i+=2){var y=mid-val(i+off);i?x.lineTo(i,y):x.moveTo(i,y)}
+    var g=x.createLinearGradient(0,0,W,0);g.addColorStop(0,'rgba(234,164,58,0)');g.addColorStop(.25,'#eaa43a');g.addColorStop(1,'#eaa43a');
+    x.strokeStyle=g;x.stroke();
+    // highlight anomaly segment
+    x.beginPath();x.strokeStyle='#ee5a4d';x.lineWidth=2.5;
+    for(var j=-1;j<=0;j++){var s2=bandStart+j*1400;
+      var first=true;
+      for(var i2=s2;i2<=s2+80;i2+=2){if(i2<0||i2>W)continue;var yy=mid-val(i2+off);first?x.moveTo(i2,yy):x.lineTo(i2,yy);first=false}
+    }
+    x.stroke();
+  }
+  function loop(){t+=1.4;draw();requestAnimationFrame(loop)}
+  size();window.addEventListener('resize',function(){size();draw()});
+  if(still){t=500;draw()}else loop();
+})();
+</script>
 </body>
 </html>
